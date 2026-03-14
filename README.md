@@ -10,7 +10,7 @@ These instructions will get the project running locally in under 5 minutes.
 * [uv](https://github.com/astral-sh/uv) (for managing Python dependencies)
 * Node.js & npm (for the Next.js frontend)
 * LiveKit Cloud account and API Keys
-* OpenAI / Deepgram / Cartesia API Keys (depending on your `.env` configuration)
+* OpenAI / Deepgram / Cartesia API Keys (.env)
 
 ### 1. Environment Variables
 Before running the applications, set up your environment variables using the provided examples.
@@ -36,7 +36,7 @@ cd UI/my-app/
 npm i
 npm run dev
 ```
-The UI should now be running at `http://localhost:3000` (or `3001` if the port is in use).
+The UI should now be running at `http://localhost:3000`.
 
 ---
 
