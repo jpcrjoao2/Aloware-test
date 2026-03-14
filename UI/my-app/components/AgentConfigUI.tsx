@@ -150,7 +150,7 @@ export default function AgentConfigUI({
       <Box sx={{ maxWidth: 1200, mx: 'auto', px: 2 }}>
         <Stack spacing={3}>
           <Box>
-            <Typography variant="h4" fontWeight={700}>
+            <Typography variant="h4" color='#000' fontWeight={700}>
               Hospital Agent Config
             </Typography>
             <Typography variant="body1" color="text.secondary" mt={1}>

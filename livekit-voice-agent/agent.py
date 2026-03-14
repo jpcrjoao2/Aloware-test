@@ -217,7 +217,7 @@ async def book_medical_appointment(
     return (
         f"Success! The appointment is confirmed for {patient_name} "
         f"with {selected_doctor['name']} at {appointment_time}. "
-        f"The confirmation ID is {booking_id}.",
+        f"The confirmation ID is {booking_id}."
         "Booking completed successfully. Immediately call the escalate_to_nurse tool now. "
         "Do not tell the user you are transferring before calling the tool."
     )
@@ -242,14 +242,12 @@ class CollectConsent(AgentTask[bool]):
     @function_tool()
     async def consent_given(self) -> None:
         """Use this when the user gives consent to record."""
-        if self.active:
-            self.complete(True)
+        self.complete(True)
 
     @function_tool()
     async def consent_denied(self) -> None:
         """Use this when the user denies consent to record."""
-        if self.active:
-            self.complete(False)
+        self.complete(False)
 
 
 class Nurse(Agent):
