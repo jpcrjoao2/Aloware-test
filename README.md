@@ -2,7 +2,7 @@
 
 This repository contains a real-time voice agent and a simple React (Next.js) Admin UI for configuring it.
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 * [uv](https://github.com/astral-sh/uv) (for managing Python dependencies)
@@ -48,7 +48,7 @@ If you want to explore or change the Cartesia voice models used by the agents vi
 
 ---
 
-## 🧠 Architecture & Decisions
+## Architecture & Decisions
 
 ### Framework Choice: Why LiveKit?
 I chose LiveKit over Pipecat because, after reviewing the job description and seeing LiveKit mentioned, I decided to dive deep into their ecosystem. The experience was excellent: their documentation is thorough, and the available online resources, tutorials, and community support made the learning curve much smoother. Since I had already started familiarizing myself with LiveKit's architecture and was enjoying the developer experience, it made perfect sense to continue using it for this project rather than pivoting to Pipecat.
