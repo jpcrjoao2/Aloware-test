@@ -26,7 +26,7 @@ Open a terminal and run the following commands to install dependencies, download
 
 ```bash
 cd livekit-voice-agent
-uv init livekit-voice-agent --bare
+uv sync
 uv add "livekit-agents[silero,turn-detector,mcp]~=1.3" "livekit-plugins-noise-cancellation~=0.2" livekit-plugins-openai livekit-plugins-deepgram python-dotenv rich
 uv run python agent.py download-files
 uv run python agent.py dev
