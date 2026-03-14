@@ -43,16 +43,36 @@ The UI should now be running at `http://localhost:3000` (or `3001` if the port i
 ## 🧠 Architecture & Decisions
 
 ### Framework Choice: Why LiveKit?
-[Write here why you picked LiveKit over Pipecat]
+I chose LiveKit over Pipecat because, after reviewing the job description and seeing LiveKit mentioned, I decided to dive deep into their ecosystem. The experience was excellent: their documentation is thorough, and the available online resources, tutorials, and community support made the learning curve much smoother. Since I had already started familiarizing myself with LiveKit's architecture and was enjoying the developer experience, it made perfect sense to continue using it for this project rather than pivoting to Pipecat.
 
 ### What I Built & Decisions Made
-[Detail your implementation here. Mention the specific phone call scenario you chose, the 3 tools your agent executes, and the guardrail/safety measure you implemented. Mention that the UI edits the agent's instructions, persona, and tools without needing a database.]
+I built a two-agent healthcare system: a **Scheduling Assistant** and a **Triage Nurse**. I wanted to avoid building a generic, single-purpose bot, so I designed a multi-step scenario that requires a handoff between two distinct personas.
+
+**The Scenario & Tools:**
+1.  **Search Doctors:** The user asks for a specific medical specialty (e.g., Cardiology, Neurology). The Assistant searches a mock database and returns available doctors and time slots.
+2.  **Book Appointment:** The user selects a doctor and time. The Assistant collects their name, confirms the slot, and generates a booking ID.
+3.  **Escalate to Nurse:** Once the booking is confirmed, the Assistant automatically calls a tool to transfer the call to the Triage Nurse.
+4.  **Triage Patient (Nurse):** The Nurse asks the patient for their main symptom, reason for the visit, symptom duration, and severity, saving this to a triage database.
+
+**Guardrails & Safety Measures:**
+* **Mandatory Search Before Booking:** Initially, the LLM tried to book appointments without checking availability. I implemented a guardrail where the booking tool is only injected into the context *after* the doctor search tool is executed successfully.
+* **Data Standardization:** The LLM would sometimes output dates in conversational formats like "next Wednesday". I enforced strict parameter validation to ensure the data matched the exact format expected by the database.
+* **Preventing Hallucinations in Triage:** During early tests, the Nurse agent inferred the patient's symptoms based on the chosen doctor's specialty (e.g., assuming heart issues for a Cardiologist) and executed the triage tool with empty or assumed strings. I implemented strict instructions and validation to ensure the Nurse *must* ask the patient directly for all four triage parameters before calling the tool.
+* **Context Isolation on Handoff:** When transferred, the Nurse initially repeated the Assistant's confirmation messages. I adjusted the prompt context so the Nurse starts directly with the triage introduction without repeating the previous agent's dialog.
 
 ### Bonus Feature
-[State which ONE bonus feature you chose (Evals, MCP, Latency, or Custom) and why it excited you. Explain how you went deep into this specific feature]
+I chose to focus on **Latency**. Minimizing latency in voice agents is fascinating because human conversations are highly sensitive to delay. In a text chat, an 800ms delay is barely noticeable, but in a voice call, an 800ms pause creates awkward silences, causing users to think the agent didn't hear them, leading to interruptions and a poor user experience.
+
+To optimize and measure latency, I implemented several strategies:
+* **Pre-warming VAD:** I implemented VAD pre-warming so the model is loaded into memory before the call starts, reducing initial startup time.
+* **Preemptive Generation:** I enabled `preemptive_generation`, which streams context to the LLM while the user is still speaking. This drastically reduces the Time to First Token (TTFT) when the user finishes their sentence.
+* **Turn Detection (Multilingual Model):** I used the multilingual turn detector to accurately predict the End of Utterance (EOU). This prevents the agent from interrupting the user when they take natural conversational pauses (like saying "I think I want..." and pausing to think), which would otherwise ruin the context window.
+* **Rich Metrics Logging:** I utilized LiveKit's `metrics` module and the `Rich` library to capture and display detailed tables in the console. This allowed me to track Time to First Audio, Time to First Token, End of Utterance delays, and the percentage of turns completed in under 1000ms.
 
 ### Future Improvements
-[Explain what you would improve, refactor, or add if you had more than one day to work on this project.]
+If I had more time, I would focus on the following:
+* **Consistency in Latency:** While I achieved low latency on average, the response times can still be inconsistent depending on the complexity of the LLM's reasoning. I would investigate ways to standardize response times to make the conversation feel more rhythmic and predictable.
+* **Expanded Test Coverage:** I would add automated evaluations to test edge cases, such as users trying to book appointments for specialties that don't exist or refusing to answer the triage questions.
 
 ---
 
