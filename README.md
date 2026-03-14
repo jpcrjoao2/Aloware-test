@@ -1,10 +1,8 @@
 # Aloware Voice Agent Test Project
 
-This repository contains a real-time voice agent and a simple React (Next.js) Admin UI for configuring it, built for the Aloware Engineering Test Project.
+This repository contains a real-time voice agent and a simple React (Next.js) Admin UI for configuring it.
 
 ## 🚀 Setup Instructions
-
-These instructions will get the project running locally in under 5 minutes. 
 
 ### Prerequisites
 * [uv](https://github.com/astral-sh/uv) (for managing Python dependencies)
@@ -14,8 +12,14 @@ These instructions will get the project running locally in under 5 minutes.
 
 ### 1. Environment Variables
 Before running the applications, set up your environment variables using the provided examples.
-1. Navigate to the backend folder and copy the example file: `cp .env.example .env`
+
+**Backend:**
+1. Navigate to the backend folder (`livekit-voice-agente`) and copy the example file: `cp .env.example .env`
 2. Fill in your LiveKit and chosen LLM/STT/TTS provider keys in the `.env` file.
+
+**Frontend:**
+1. Navigate to the frontend folder (`UI/my-app`) and copy the example file: `cp .env.example .env.local` (or `.env`)
+2. Fill in the required frontend environment variables (like your LiveKit URLs/keys).
 
 ### 2. Backend Setup (LiveKit Voice Agent)
 Open a terminal and run the following commands to install dependencies, download the necessary models, and start the agent:
@@ -81,4 +85,4 @@ If I had more time, I would focus on the following:
 ---
 
 ## 📹 Loom Video Demo
-[Insert Link to your 5-minute Loom video here]
+[Watch the 5-minute Loom Demo Here](https://www.loom.com/share/a340da86e43842ab93889f95b485896d)
