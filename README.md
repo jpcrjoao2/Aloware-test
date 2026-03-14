@@ -86,3 +86,7 @@ If I had more time, I would focus on the following:
 
 ## 📹 Loom Video Demo
 [Watch the 5-minute Loom Demo Here](https://www.loom.com/share/a340da86e43842ab93889f95b485896d)
+
+## 📝 Ideation & Thought Process
+This document contains the translated transcript of my core ideation and logic. It served as the baseline for structuring this project and enhancing this README file:
+[Project Ideation Draft - Google Docs](https://docs.google.com/document/d/1n6-8wzZW6jUGxHDjQcRCoV8G8c82DHV74aPgGbZ3dbg/edit?usp=sharing)
