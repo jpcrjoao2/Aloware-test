@@ -31,6 +31,9 @@ uv run python agent.py dev
 ### 3. Frontend Setup (React / Next.js Admin UI)
 Open a **new** terminal window and run the following commands to start the configuration UI:
 
+If you want to explore or change the Cartesia voice models used by the agents via the Admin UI or configuration, you can find the available voice IDs in the official documentation here:
+[Cartesia TTS Models - LiveKit Docs](https://docs.livekit.io/agents/models/tts/cartesia/)
+
 ```bash
 cd UI/my-app/
 npm i
