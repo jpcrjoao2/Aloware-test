@@ -39,7 +39,7 @@ Open a **new** terminal window and run the following commands to start the confi
 
 ```bash
 cd UI/my-app/
-npm i
+npm install
 npm run dev
 ```
 The UI should now be running at `http://localhost:3000`.
