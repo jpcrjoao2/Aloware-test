@@ -372,30 +372,6 @@ export default function AgentConfigUI({
                     </Stack>
                   </CardContent>
                 </Card>
-
-                <Card>
-                  <CardContent>
-                    <Stack spacing={2}>
-                      <Typography variant="h6" fontWeight={700}>
-                        Session Opening
-                      </Typography>
-
-                      <TextField
-                        label="Session Opening Instruction"
-                        value={config.session_opening_instruction}
-                        onChange={(e) =>
-                          onChange({
-                            ...config,
-                            session_opening_instruction: e.target.value,
-                          })
-                        }
-                        fullWidth
-                        multiline
-                        minRows={3}
-                      />
-                    </Stack>
-                  </CardContent>
-                </Card>
               </Stack>
             </Grid>
           </Grid>

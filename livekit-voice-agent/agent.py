@@ -226,7 +226,6 @@ async def book_medical_appointment(
 class CollectConsent(AgentTask[bool]):
     def __init__(self, chat_ctx=None):
         app_cfg = load_app_config()
-
         super().__init__(
             instructions=app_cfg.collect_consent.instructions,
             chat_ctx=chat_ctx,
@@ -273,13 +272,24 @@ class Nurse(Agent):
             tools.extend(end_call_tool.tools)
 
         super().__init__(
-            instructions=self.cfg.instructions,
+            instructions=f"""
+            You are {self.cfg.name}.
+            {self.cfg.instructions}.
+            """,
             chat_ctx=chat_ctx,
             tts=build_cartesia_tts(self.cfg.voice),
             tools=tools,
         )
+        
+        
 
     async def on_enter(self) -> None:
+        
+        await self.session.generate_reply(
+            instructions=f"""I'm {self.cfg.name}. 
+            greetings: {self.cfg.greeting}"""
+        )
+        
         consent = await CollectConsent(chat_ctx=self.chat_ctx)
 
         if consent:
@@ -354,12 +364,16 @@ class Assistant(Agent):
                     name="escalate_to_nurse",
                 )
             )
-
+        
         super().__init__(
-            instructions=self.cfg.instructions,
+            instructions=f"""
+            You are {self.cfg.name}.
+            {self.cfg.instructions}.
+            """,
             tts=build_cartesia_tts(self.cfg.voice),
             tools=tools,
         )
+        
 
     async def search_doctors_by_specialty(self, context: RunContext, specialty: str) -> str:
         """Search for available doctors within a specific medical specialty.
@@ -505,7 +519,7 @@ async def entrypoint(ctx: agents.JobContext):
     )
 
     await session.generate_reply(
-        instructions=app_cfg.session_opening_instruction
+        instructions=app_cfg.assistant.greeting
     )
 
 

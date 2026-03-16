@@ -23,5 +23,4 @@ export interface AgentConfig {
   assistant: PersonaConfig;
   nurse: PersonaConfig;
   collect_consent: TaskConfig;
-  session_opening_instruction: string;
 }

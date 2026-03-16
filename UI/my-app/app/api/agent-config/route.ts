@@ -50,7 +50,6 @@ function validateAgentConfig(data: any): { valid: boolean; error?: string } {
     'assistant',
     'nurse',
     'collect_consent',
-    'session_opening_instruction',
   ];
 
   for (const key of requiredTopLevel) {
@@ -138,13 +137,6 @@ function validateAgentConfig(data: any): { valid: boolean; error?: string } {
     return {
       valid: false,
       error: 'collect_consent.greeting must be a string',
-    };
-  }
-
-  if (typeof data.session_opening_instruction !== 'string') {
-    return {
-      valid: false,
-      error: 'session_opening_instruction must be a string',
     };
   }
 

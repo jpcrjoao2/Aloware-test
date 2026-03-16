@@ -30,7 +30,6 @@ class AppConfig:
     assistant: PersonaConfig
     nurse: PersonaConfig
     collect_consent: TaskConfig
-    session_opening_instruction: str
 
 
 CONFIG_PATH = Path(__file__).resolve().parent / "agent_config.json"
@@ -73,7 +72,6 @@ def load_app_config() -> AppConfig:
         assistant=assistant,
         nurse=nurse,
         collect_consent=collect_consent,
-        session_opening_instruction=raw["session_opening_instruction"],
     )
 
 
