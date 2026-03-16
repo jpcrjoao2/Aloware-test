@@ -1,6 +1,6 @@
 # Aloware Voice Agent Test Project
 
-This repository contains a real-time voice agent and a simple React (Next.js) Admin UI for configuring it.
+This repository contains a real-time voice agent and a simple React (Next.js) Admin UI for configuring it. \n
 *(Note: The raw ideation and thought process document that structured this project is linked at the very bottom of this README).*
 
 ## Setup Instructions
